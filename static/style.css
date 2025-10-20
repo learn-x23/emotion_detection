@@ -1,0 +1,13 @@
+body {
+    font-family: system-ui, sans-serif;
+    margin: 24px;
+}
+video,
+canvas,
+button {
+    display: block;
+    margin-top: 12px;
+}
+canvas {
+    display: none;
+}

@@ -11,6 +11,16 @@ const BOX_COLORS = [
     "#0000FF", // surprise
 ];
 
+const EMOTION_EMOJIS = [
+    "😠", // angry
+    "🤢", // disgust
+    "😨", // fear
+    "😄", // happy
+    "😐", // neutral
+    "😢", // sad
+    "😲", // surprise
+];
+
 async function loop(fn, fpsLimit = 30) {
     const frameDuration = 1000 / fpsLimit;
 
@@ -23,6 +33,16 @@ async function loop(fn, fpsLimit = 30) {
         const wait = frameDuration - elapsed;
         if (wait > 0) await new Promise((r) => setTimeout(r, wait));
     }
+}
+
+function draw(emoji, ctx, box) {
+    ctx.save();
+    const size = Math.max(box.width, box.height);
+    ctx.font = `${size}px system-ui, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(emoji, box.x0 + box.width / 2, box.y0 + box.height / 2);
+    ctx.restore();
 }
 
 async function processFrame() {
@@ -47,12 +67,10 @@ async function processFrame() {
     }
 
     // // Draw boxes around faces
-    ctx.lineWidth = 2;
     for (let i = 0; i < boxes.length; i++) {
         const box = boxes[i];
         const emotion = await emotions[i];
-        ctx.strokeStyle = BOX_COLORS[emotion];
-        ctx.strokeRect(box.x0, box.y0, box.width, box.height);
+        draw(EMOTION_EMOJIS[emotion], ctx, box);
     }
 
     // Update output

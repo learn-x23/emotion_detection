@@ -20,9 +20,9 @@ stages:
       - data/model.onnx
       - data/model.pt
     metrics:
-      - train.json:
+      - metrics/train.json:
           cache: false
-      - test.json:
+      - metrics/test.json:
           cache: false
 
   generate_assets:
@@ -36,3 +36,92 @@ stages:
       - data/model.onnx
       - data/basemodel.onnx
       - data/ultraface-RFB-320.onnx
+
+plots:
+  - losses:
+      y:
+        plots/losses.csv: [train, validation]
+  # Confusion matrices (normalized row-wise)
+  - what-falls-in-emotion-train:
+      title: "What falls in emotion (train)"
+      template: confusion_normalized
+      x:
+        plots/train_classes.csv: actual
+      y:
+        plots/train_classes.csv: predicted
+  - where-are-emotions-falling-train:
+      title: "Where emotions fall (train)"
+      template: confusion_normalized
+      x:
+        plots/train_classes.csv: predicted
+      y:
+        plots/train_classes.csv: actual
+  - what-falls-in-emotion-test:
+      title: "What falls in emotion (test)"
+      template: confusion_normalized
+      x:
+        plots/test_classes.csv: actual
+      y:
+        plots/test_classes.csv: predicted
+  - where-are-emotions-falling-test:
+      title: "Where emotions fall (test)"
+      template: confusion_normalized
+      x:
+        plots/test_classes.csv: predicted
+      y:
+        plots/test_classes.csv: actual
+  # Metrics
+  - f1-train:
+      title: "F1-scores per emotion (train)"
+      template: bar_horizontal
+      x_label: "Emotion"
+      y_label: "F1-score"
+      x:
+        plots/train_metrics.json: f1
+      y:
+        plots/train_metrics.json: emotion
+  - precision-train:
+      title: "Precision per emotion (train)"
+      template: bar_horizontal
+      x_label: "Emotion"
+      y_label: "precision"
+      x:
+        plots/train_metrics.json: precision
+      y:
+        plots/train_metrics.json: emotion
+  - recall-train:
+      title: "Recall per emotion (train)"
+      template: bar_horizontal
+      x_label: "Emotion"
+      y_label: "recall"
+      x:
+        plots/train_metrics.json: recall
+      y:
+        plots/train_metrics.json: emotion
+  - f1-test:
+      title: "F1-scores per emotion (test)"
+      template: bar_horizontal
+      x_label: "Emotion"
+      y_label: "F1-score"
+      x:
+        plots/test_metrics.json: f1
+      y:
+        plots/test_metrics.json: emotion
+  - precision-test:
+      title: "Precision per emotion (test)"
+      template: bar_horizontal
+      x_label: "Emotion"
+      y_label: "precision"
+      x:
+        plots/test_metrics.json: precision
+      y:
+        plots/test_metrics.json: emotion
+  - recall-test:
+      title: "Recall per emotion (test)"
+      template: bar_horizontal
+      x_label: "Emotion"
+      y_label: "recall"
+      x:
+        plots/test_metrics.json: recall
+      y:
+        plots/test_metrics.json: emotion

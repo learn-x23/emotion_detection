@@ -6,13 +6,13 @@ stages:
     deps:
     - path: data/ferplus
       hash: md5
-      md5: 7daefad73c8cdd4a0ee369bf88570afc.dir
-      size: 86432916
-      nfiles: 35713
+      md5: 15327bfbd05879ecdc5b00faf3c6c961.dir
+      size: 86467740
+      nfiles: 35715
     - path: notebook.ipynb
       hash: md5
-      md5: 29ba936ef9de1e5d870a93b7e38b2370
-      size: 21370
+      md5: 26ccad05ced2943cf90a1ad3829fda29
+      size: 22960
     params:
       params.yaml:
         epochs: 40
@@ -21,35 +21,35 @@ stages:
     outs:
     - path: data/basemodel.onnx
       hash: md5
-      md5: c3f4823d694db08e125afe76ae7c1385
+      md5: 939c61217ece1bfb109b094e39ea6bb8
       size: 1713797
     - path: data/model.onnx
       hash: md5
-      md5: 792643b3c5681b9cff14d3cb21e13da9
+      md5: 232b2028557c5f24fc12dc627fa3777e
       size: 1728964
     - path: data/model.pt
       hash: md5
-      md5: 904ae2fa48e4cf08f0ac903cb48775aa
+      md5: ada630a8c8e71f470914f3274d6d9e91
       size: 1696273
-    - path: test.json
+    - path: metrics/test.json
       hash: md5
-      md5: 01eff70c0a0a89dd7cfc660c6d4c630b
-      size: 1142
-    - path: train.json
+      md5: e35f8fb497f7c482e98b19590a34b284
+      size: 1105
+    - path: metrics/train.json
       hash: md5
-      md5: a72d1f823c3ed5ff1ea35ef008c70c98
-      size: 1158
+      md5: 1685208ca06a227f082df040e399704f
+      size: 1089
   generate_assets:
     cmd: "rm -rf static/assets && mkdir static/assets && cp data/model.onnx static/assets/
       && cp data/basemodel.onnx static/assets/ && cp data/ultraface-RFB-320.onnx static/assets/\n"
     deps:
     - path: data/basemodel.onnx
       hash: md5
-      md5: c3f4823d694db08e125afe76ae7c1385
+      md5: 939c61217ece1bfb109b094e39ea6bb8
       size: 1713797
     - path: data/model.onnx
       hash: md5
-      md5: 792643b3c5681b9cff14d3cb21e13da9
+      md5: 232b2028557c5f24fc12dc627fa3777e
       size: 1728964
     - path: data/ultraface-RFB-320.onnx
       hash: md5
